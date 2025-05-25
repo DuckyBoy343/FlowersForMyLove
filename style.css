@@ -5,19 +5,23 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 15px; /* Añadimos un poco de padding al body para móviles */
+    box-sizing: border-box; /* Importante para que el padding no afecte el ancho total */
     background-color: #fce4ec;
     color: #333;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden; /* Prevenir scroll horizontal accidental */
 }
 
 .container {
     background-color: #fff;
-    padding: 30px;
+    padding: 20px; /* Un padding base */
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.5s ease-in-out;
-    max-width: 90%; /* Para que no sea demasiado ancho en pantallas grandes */
+    width: 100%; /* Ocupará el ancho disponible hasta su max-width */
+    max-width: 600px; /* Ancho máximo para el contenedor en pantallas grandes */
+    box-sizing: border-box;
 }
 
 #mensajeInicial {
@@ -27,8 +31,9 @@ body {
 
 #mensajeInicial h1 {
     color: #e91e63;
-    font-size: 2.5em;
+    font-size: 2em; /* Ajustado para empezar más pequeño */
     margin-bottom: 20px;
+    word-wrap: break-word; /* Para evitar que palabras largas rompan el layout */
 }
 
 #seleccionFlores {
@@ -36,82 +41,77 @@ body {
     transition: opacity 0.8s ease-in-out;
 }
 
-#textoSubtitulo { /* Estilo para el subtítulo */
-    font-size: 1.2em;
+#textoSubtitulo {
+    font-size: 1.1em; /* Ajustado */
     margin-bottom: 20px;
     color: #555;
-    transition: opacity 0.5s ease-out; /* Transición si lo ocultamos/mostramos */
+    transition: opacity 0.5s ease-out;
 }
 
 button {
     background-color: #ff80ab;
     color: white;
     border: none;
-    padding: 15px 25px;
-    margin: 10px 5px; /* Ajustado margen para que quepan mejor */
+    padding: 12px 20px; /* Ajustado */
+    margin: 8px 5px;
     border-radius: 25px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.9em; /* Ajustado */
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: inline-block; /* Para que varios botones puedan estar en una línea */
+    max-width: 100%; /* Para que no se desborden */
 }
 
-button:hover {
-    background-color: #f06292;
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(1px);
-}
-
-/* --- NUEVOS ESTILOS / MODIFICACIONES --- */
 #btnCanelita {
-    background-color: #a1887f; /* Un color café claro para Canelita */
-    display: block; /* Para que ocupe todo el ancho disponible y se centre */
+    background-color: #a1887f;
+    display: block; /* Este botón ocupará su propia línea */
+    width: fit-content; /* Ancho basado en su contenido */
+    min-width: 180px; /* Un ancho mínimo para que no se vea muy pequeño */
+    max-width: 80%; /* No más del 80% del contenedor padre */
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px; /* Espacio sobre este botón */
+    margin-top: 15px;
 }
 
 #btnCanelita:hover {
-    background-color: #8d6e63; /* Café más oscuro al pasar el cursor */
+    background-color: #8d6e63;
 }
 
 .contenedor-flores {
-    margin-top: 20px; /* Reducido un poco el margen superior */
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    min-height: 50px; /* Ajustado para que no ocupe tanto si está vacío */
+    gap: 10px; /* Espacio entre flores reducido un poco */
+    min-height: 50px;
     transition: opacity 0.5s ease-out;
+    opacity: 0; /* Empezar oculto, JS lo cambia a 1 */
 }
 
-.contenedor-imagen { /* Estilo general para contenedores de imágenes */
+.contenedor-imagen {
     margin-top: 20px;
-    opacity: 0; /* Inicialmente invisible para el fade-in */
-    transition: opacity 1s ease-in-out; /* Duración del fade-in */
-    /* La clase .hidden (con display:none) se quitará con JS */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 .contenedor-imagen img {
-    max-width: 90%; /* La imagen no superará el 90% del ancho del contenedor */
-    max-height: 350px; /* Altura máxima para la imagen */
+    max-width: 100%; /* La imagen no superará el ancho de su contenedor */
+    height: auto;    /* Mantiene la proporción de la imagen */
+    max-height: 280px; /* Altura máxima base para móviles */
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    display: block; /* Permite centrar con margin: auto */
-    margin: 0 auto; /* Centra la imagen horizontalmente */
+    display: block;
+    margin: 0 auto;
 }
-/* --- FIN DE NUEVOS ESTILOS / MODIFICACIONES --- */
 
 .hidden {
     display: none !important;
 }
 
 .flor {
-    font-size: 3rem;
+    font-size: 2.2rem; /* Tamaño de flor base para móviles */
     animation: aparecer 0.5s ease-out;
     transition: transform 0.3s ease;
 }
@@ -131,24 +131,63 @@ button:active {
     }
 }
 
-/* ... (otros estilos) ... */
+/* --- MEDIA QUERIES PARA RESPONSIVE DESIGN --- */
 
-.contenedor-flores {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    min-height: 50px;
-    transition: opacity 0.5s ease-out; /* AÑADIDO/MODIFICADO para fade out */
-    opacity: 1; /* Por defecto visible cuando tiene contenido, JS manejará el fade in/out */
+/* Para tablets (ej. pantallas mayores a 600px) */
+@media (min-width: 600px) {
+    .container {
+        padding: 30px; /* Más padding en pantallas grandes */
+    }
+
+    #mensajeInicial h1 {
+        font-size: 2.5em; /* Restaurar tamaño original */
+    }
+
+    #textoSubtitulo {
+        font-size: 1.2em; /* Restaurar tamaño original */
+    }
+
+    button {
+        padding: 15px 25px; /* Restaurar padding original */
+        font-size: 1em;    /* Restaurar tamaño original */
+    }
+    
+    .flor {
+        font-size: 3rem; /* Tamaño de flor original */
+    }
+
+    .contenedor-imagen img {
+        max-height: 350px; /* Permitir que la imagen sea un poco más alta */
+    }
 }
 
-.contenedor-imagen {
-    margin-top: 20px;
-    opacity: 0;
-    transition: opacity 1s ease-in-out; /* 1 segundo de fade para la imagen */
-}
+/* Para móviles muy pequeños (ej. pantallas menores a 420px) */
+/* Haremos que los botones de flores se apilen */
+@media (max-width: 420px) {
+    #mensajeInicial h1 {
+        font-size: 1.8em;
+    }
 
-/* ... (resto de estilos) ... */
+    #textoSubtitulo {
+        font-size: 1em;
+    }
+
+    button { /* Estilo general para botones en pantallas pequeñas */
+        display: block; /* Cada botón en su propia línea */
+        width: 85%;    /* Ancho del botón */
+        margin: 10px auto; /* Centrado y con espacio vertical */
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    /* El botón de Canelita ya es display: block, así que heredará bien */
+    /* No es necesario redefinir #btnCanelita aquí a menos que necesite ajustes específicos */
+    
+    .flor {
+        font-size: 2rem;
+    }
+
+    .contenedor-imagen img {
+        max-height: 240px;
+    }
+}
