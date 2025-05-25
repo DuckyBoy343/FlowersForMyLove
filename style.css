@@ -1,0 +1,154 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #fce4ec;
+    color: #333;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease-in-out;
+    max-width: 90%; /* Para que no sea demasiado ancho en pantallas grandes */
+}
+
+#mensajeInicial {
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#mensajeInicial h1 {
+    color: #e91e63;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#seleccionFlores {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#textoSubtitulo { /* Estilo para el subtítulo */
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #555;
+    transition: opacity 0.5s ease-out; /* Transición si lo ocultamos/mostramos */
+}
+
+button {
+    background-color: #ff80ab;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    margin: 10px 5px; /* Ajustado margen para que quepan mejor */
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background-color: #f06292;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* --- NUEVOS ESTILOS / MODIFICACIONES --- */
+#btnCanelita {
+    background-color: #a1887f; /* Un color café claro para Canelita */
+    display: block; /* Para que ocupe todo el ancho disponible y se centre */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px; /* Espacio sobre este botón */
+}
+
+#btnCanelita:hover {
+    background-color: #8d6e63; /* Café más oscuro al pasar el cursor */
+}
+
+.contenedor-flores {
+    margin-top: 20px; /* Reducido un poco el margen superior */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    min-height: 50px; /* Ajustado para que no ocupe tanto si está vacío */
+    transition: opacity 0.5s ease-out;
+}
+
+.contenedor-imagen { /* Estilo general para contenedores de imágenes */
+    margin-top: 20px;
+    opacity: 0; /* Inicialmente invisible para el fade-in */
+    transition: opacity 1s ease-in-out; /* Duración del fade-in */
+    /* La clase .hidden (con display:none) se quitará con JS */
+}
+
+.contenedor-imagen img {
+    max-width: 90%; /* La imagen no superará el 90% del ancho del contenedor */
+    max-height: 350px; /* Altura máxima para la imagen */
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    display: block; /* Permite centrar con margin: auto */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+/* --- FIN DE NUEVOS ESTILOS / MODIFICACIONES --- */
+
+.hidden {
+    display: none !important;
+}
+
+.flor {
+    font-size: 3rem;
+    animation: aparecer 0.5s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.flor:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ... (otros estilos) ... */
+
+.contenedor-flores {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    min-height: 50px;
+    transition: opacity 0.5s ease-out; /* AÑADIDO/MODIFICADO para fade out */
+    opacity: 1; /* Por defecto visible cuando tiene contenido, JS manejará el fade in/out */
+}
+
+.contenedor-imagen {
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* 1 segundo de fade para la imagen */
+}
+
+/* ... (resto de estilos) ... */
